@@ -14,6 +14,8 @@ import React, { useState } from 'react'
 
 function App() {
     const [showSideBar, setSideBar] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
+
    const toggleSideBar = () => {
     setSideBar(prev => !prev);
   };
@@ -22,7 +24,8 @@ function App() {
   return (
     <>
      <BrowserRouter>
-     <Navbar toggleSideBar={toggleSideBar} />
+     <Navbar toggleSideBar={toggleSideBar}  searchTerm={searchTerm}
+  setSearchTerm={setSearchTerm}/>
         <div className="flex  bg-gray-100 text-gray-800 min-h-screen  ">
           {showSideBar && <Sidebar />}
           <div className="flex-1 p-4">
@@ -34,7 +37,7 @@ function App() {
               <Route path="/kids" element={<ShopCategory />} />
               <Route path="/products" element={<Products />} />
               <Route path="/cart" element={<Cart />} />
-              <Route path=":productId" element={<ProductDetails />} />
+              <Route path="/products/:id" element={<ProductDetails />} />
 
             </Routes>
           </div>

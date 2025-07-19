@@ -1,11 +1,13 @@
 import React from 'react'
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faBell, faUser } from '@fortawesome/free-solid-svg-icons';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
-function Navbar({ toggleSideBar }) {
+function Navbar({ toggleSideBar  }) {
 
-    const [showNotifications, setShowNotifications] = React.useState(false);
+    const [showNotifications, setShowNotifications] = useState(false);
+    const [searchTerm, setSearchTerm] = useState('');
 
     const handleNotifications = () => {
         setShowNotifications((prev) => !prev);
@@ -16,16 +18,16 @@ function Navbar({ toggleSideBar }) {
         setShowUserProfile((prev) => !prev);
     };
     return (
-        <div className="w-full h-16 bg-blue-400 text-white flex items-center justify-between px-4 sm:px-6 md:max-w-screen sm:max-w-full md:min-w-full sm:min-w-screen md:justify-between sm:justify-between  absolute  shadow-2xl">
+        <div className="w-full h-20 bg-blue-400 text-white flex items-center justify-between px-4 sm:px-6 md:max-w-screen sm:max-w-full md:min-w-full sm:min-w-screen md:justify-between sm:justify-between  absolute  shadow-2xl">
 
-                <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4">
                 <button onClick={toggleSideBar} className='cursor-pointer p-4'>
                     <FontAwesomeIcon icon={faBars} size="2xl" />
                 </button>
 
 
 
-                <h1 className="text-xl sm:text-2xl font-bold hidden sm:block">Ecommerce Store</h1>
+                <h1 className="text-4xl sm:text-2xl font-bold hidden sm:block">Ecommerce Store</h1>
             </div>
 
             <div className="flex items-center gap-4 sm:gap-6 relative">
@@ -33,6 +35,9 @@ function Navbar({ toggleSideBar }) {
                     <input
                         type="text"
                         placeholder="Search products..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+
                         className="px-4 py-2 pr-10 rounded-lg bg-white text-black w-full focus:outline-none focus:ring-2 focus:ring-blue-300"
                     />
                     <FontAwesomeIcon

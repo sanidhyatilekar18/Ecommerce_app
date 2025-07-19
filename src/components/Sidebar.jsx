@@ -9,7 +9,7 @@ const getLinkClass = ({ isActive }) =>
    ${isActive ? 'text-black bg-white' : 'text-white hover:bg-blue-400'}`;
 function Sidebar() {
   return (
-    <div className='w-[220px] min-h-screen  bg-blue-500 text-white text-start items-start px-4 py-20'>
+    <div className='w-[250px] min-h-screen  bg-blue-500 text-white text-start items-start px-4 py-20'>
      
 
       <div className='mt-4'>
