@@ -1,12 +1,18 @@
+// src/pages/Products.jsx
+
 import { useEffect, useState } from 'react';
 import { getProductsByCategory, categoryMap } from '../utils/api';
-import ProductCard from '../components/ProductsCard';
+import ProductsCard from '../components/ProductsCard';
+import { useLocation } from 'react-router-dom';
+
 
 const Products = () => {
   const [products, setProducts] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [activeCategory, setActiveCategory] = useState('Men');
-  const [viewMode, setViewMode] = useState("grid");
+  const [viewMode, setViewMode] = useState('grid');
+  const location = useLocation();
+  const searchQuery = new URLSearchParams(location.search).get('search') || '';
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -15,46 +21,66 @@ const Products = () => {
     };
     fetchProducts();
   }, [activeCategory]);
+  useEffect(() => {
+  const savedSearch = localStorage.getItem('search');
+  if (savedSearch) setSearchTerm(savedSearch);
+}, []);
 
-  const filteredProducts = products.filter((product) =>
-    product.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+
+ const combinedSearch = `${searchTerm} ${searchQuery}`.toLowerCase().trim();
+
+
+const filteredProducts = products.filter((product) =>
+  product.title.toLowerCase().includes(combinedSearch) ||
+  product.description.toLowerCase().includes(combinedSearch) ||
+  product.brand.toLowerCase().includes(combinedSearch)
+);
+
 
   return (
     <div className="p-6 mt-20">
-      <div className="flex justify-end mb-4 gap-2">
-        <button onClick={() => setViewMode("grid")} className="px-2 py-1 bg-blue-500 text-white rounded">Grid</button>
-        <button onClick={() => setViewMode("list")} className="px-2 py-1 bg-blue-500 text-white rounded">List</button>
-      </div>
+      <div className="flex justify-between items-center mb-4">
+        <div className="flex gap-4">
+          {Object.keys(categoryMap).map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
+              className={`px-4 py-2 rounded-lg font-medium ${
+                activeCategory === cat ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800'
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
 
-      <div className="flex gap-4 mb-6">
-        {Object.keys(categoryMap).map((cat) => (
+        <div className="flex gap-2">
           <button
-            key={cat}
-            onClick={() => setActiveCategory(cat)}
-            className={`px-4 py-2 rounded-lg font-medium ${
-              activeCategory === cat ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800'
-            }`}
+            onClick={() => setViewMode('grid')}
+            className={`px-2 py-1 rounded ${viewMode === 'grid' ? 'bg-blue-600 text-white' : 'bg-gray-300'}`}
           >
-            {cat}
+            Grid
           </button>
-        ))}
+          <button
+            onClick={() => setViewMode('list')}
+            className={`px-2 py-1 rounded ${viewMode === 'list' ? 'bg-blue-600 text-white' : 'bg-gray-300'}`}
+          >
+            List
+          </button>
+        </div>
       </div>
 
-    
-      <div className="mb-6">
-        <input
-          type="text"
-          placeholder="Search products..."
-          value={searchTerm}
-          onChange={e => setSearchTerm(e.target.value)}
-          className="w-full px-4 py-2 border rounded-lg"
-        />
-      </div>
+     
 
-      <div className={`grid ${viewMode === "grid" ? "grid-cols-2 md:grid-cols-4" : "grid-cols-2"} gap-6`}>
+      <div
+        className={`${
+          viewMode === 'grid'
+            ? 'grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'
+            : 'flex flex-col gap-4'
+        }`}
+      >
         {filteredProducts.map((product) => (
-          <ProductCard key={product.id} product={product} viewMode={viewMode} />
+          <ProductsCard key={product.id} product={product} viewMode={viewMode} />
         ))}
       </div>
     </div>

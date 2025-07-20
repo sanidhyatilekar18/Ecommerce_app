@@ -10,7 +10,11 @@ import Navbar from './components/Navbar.jsx'
 import Sidebar from './components/Sidebar.jsx'
 import ShopCategory from './pages/ShopCategory.jsx'
 import ProductDetails from './pages/ProductDetails.jsx'
+import OrderSuccess from './pages/OrderSuccess.jsx'
 import React, { useState } from 'react'
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+
 
 function App() {
     const [showSideBar, setSideBar] = useState(false);
@@ -24,6 +28,7 @@ function App() {
   return (
     <>
      <BrowserRouter>
+         <ToastContainer position="top-right" autoClose={3000} />
      <Navbar toggleSideBar={toggleSideBar}  searchTerm={searchTerm}
   setSearchTerm={setSearchTerm}/>
         <div className="flex  bg-gray-100 text-gray-800 min-h-screen  ">
@@ -38,6 +43,8 @@ function App() {
               <Route path="/products" element={<Products />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/products/:id" element={<ProductDetails />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/order-success" element={<OrderSuccess />} />
 
             </Routes>
           </div>

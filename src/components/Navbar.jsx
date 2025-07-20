@@ -4,6 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping, faBell, faUser } from '@fortawesome/free-solid-svg-icons';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 function Navbar({ toggleSideBar  }) {
 
     const [showNotifications, setShowNotifications] = useState(false);
@@ -16,7 +19,21 @@ function Navbar({ toggleSideBar  }) {
 
     const handleUserProfile = () => {
         setShowUserProfile((prev) => !prev);
-    };
+    };  
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    if (searchTerm.trim() !== '') {
+      navigate(`/products?search=${encodeURIComponent(searchTerm.trim())}`);
+      setSearchTerm('');
+    }
+  };
+
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') handleSearch();
+  };
+    
     return (
         <div className="w-full h-20 bg-blue-400 text-white flex items-center justify-between px-4 sm:px-6 md:max-w-screen sm:max-w-full md:min-w-full sm:min-w-screen md:justify-between sm:justify-between  absolute  shadow-2xl">
 
@@ -31,27 +48,28 @@ function Navbar({ toggleSideBar  }) {
             </div>
 
             <div className="flex items-center gap-4 sm:gap-6 relative">
-                <div className="relative w-64 sm:w-80">
-                    <input
-                        type="text"
-                        placeholder="Search products..."
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-
-                        className="px-4 py-2 pr-10 rounded-lg bg-white text-black w-full focus:outline-none focus:ring-2 focus:ring-blue-300"
-                    />
-                    <FontAwesomeIcon
-                        icon={faMagnifyingGlass}
-                        size="lg"
-                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-black cursor-pointer"
-                    />
-                </div>
-
+                  <div className="relative w-64 sm:w-80">
+        <input
+          type="text"
+          placeholder="Search products..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyDown={handleKeyDown}
+          className="px-4 py-2 pr-10 rounded-lg bg-white text-black w-full focus:outline-none focus:ring-2 focus:ring-blue-300"
+        />
+        <FontAwesomeIcon
+          icon={faMagnifyingGlass}
+          size="lg"
+          onClick={handleSearch}
+          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-black cursor-pointer"
+        />
+      </div>
                 <div>
 
                 </div>
-
-                <FontAwesomeIcon icon={faCartShopping} size='2xl' style={{ color: "white" }} />
+                <Link to="/cart">
+                    <FontAwesomeIcon icon={faCartShopping} size='2xl' style={{ color: "white" }} />
+                </Link>
                 <FontAwesomeIcon icon={faBell} size='2xl' style={{ color: "white" }} onClick={handleNotifications} />
                 {showNotifications && (
                     <div className='bg-gray-100 rounded-xl shadow-xl p-6 h-40 w-80 absolute top-16 right-4'>
