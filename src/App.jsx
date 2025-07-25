@@ -8,7 +8,7 @@ import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import Navbar from './components/Navbar.jsx'
 import Sidebar from './components/Sidebar.jsx'
-import ShopCategory from './pages/ShopCategory.jsx'
+
 import ProductDetails from './pages/ProductDetails.jsx'
 import OrderSuccess from './pages/OrderSuccess.jsx'
 import React, { useState } from 'react'
