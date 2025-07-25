@@ -1,7 +1,7 @@
 
 
 import { Link } from 'react-router-dom';
-
+import Rating from './Ratings';
 const ProductsCard = ({ product, viewMode }) => {
   const roundedPrice = Math.round(product.price * 80);
 
@@ -24,6 +24,8 @@ const ProductsCard = ({ product, viewMode }) => {
           <h2 className="text-lg font-semibold mt-2">{product.title}</h2>
           <p className="text-sm text-gray-600">{product.brand}</p>
           <p className="text-blue-600 font-bold mt-1">₹ {roundedPrice}</p>
+               <Rating rating={product.rating} />
+
         </div>
       </div>
     </Link>

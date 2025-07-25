@@ -1,6 +1,13 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse, faCartShopping, faUserTie } from '@fortawesome/free-solid-svg-icons';
-import { faUser } from '@fortawesome/free-regular-svg-icons';
+
+import {
+  faHouse,
+  faCartShopping,
+  faBoxes,
+  faShirt,
+  faPersonDress,
+} from '@fortawesome/free-solid-svg-icons';
+
 
 
 import { NavLink } from 'react-router-dom';
@@ -16,30 +23,31 @@ function Sidebar() {
         
        
 
-        <NavLink to="/" className={getLinkClass}>
-          <FontAwesomeIcon icon={faHouse} />
-          Home
-        </NavLink>
+      <NavLink to="/" className={getLinkClass}>
+  <FontAwesomeIcon icon={faHouse} />
+  Home
+</NavLink>
 
-        <NavLink to="/products" className={getLinkClass}>
-          <FontAwesomeIcon icon={faUserTie} />
-            Products
-        </NavLink>
+<NavLink to="/products" className={getLinkClass}>
+  <FontAwesomeIcon icon={faBoxes} />
+  Products
+</NavLink>
 
-        <NavLink to="/mens" className={getLinkClass}>
-          <FontAwesomeIcon icon={faUser} />
-          Mens
-        </NavLink>
+<NavLink to="/mens" className={getLinkClass}>
+  <FontAwesomeIcon icon={faShirt} />
+  Mens
+</NavLink>
 
-        <NavLink to="/womens" className={getLinkClass}>
-          <FontAwesomeIcon icon={faUser} />
-          Womens
-        </NavLink>
+<NavLink to="/womens" className={getLinkClass}>
+  <FontAwesomeIcon icon={faPersonDress} />
+  Womens
+</NavLink>
 
-        <NavLink to="/kids" className={getLinkClass}>
-          <FontAwesomeIcon icon={faUser} />
-          Kids
-        </NavLink>
+<NavLink to="/cart" className={getLinkClass}>
+  <FontAwesomeIcon icon={faCartShopping} />
+  Cart
+</NavLink>
+
 
 
       </div>

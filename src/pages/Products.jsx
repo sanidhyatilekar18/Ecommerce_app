@@ -1,4 +1,4 @@
-// src/pages/Products.jsx
+
 
 import { useEffect, useState } from 'react';
 import { getProductsByCategory, categoryMap } from '../utils/api';
@@ -11,6 +11,9 @@ const Products = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeCategory, setActiveCategory] = useState('Men');
   const [viewMode, setViewMode] = useState('grid');
+ const [minPrice, setMinPrice] = useState(500);
+const [maxPrice, setMaxPrice] = useState(50000); 
+
   const location = useLocation();
   const searchQuery = new URLSearchParams(location.search).get('search') || '';
 
@@ -30,11 +33,17 @@ const Products = () => {
  const combinedSearch = `${searchTerm} ${searchQuery}`.toLowerCase().trim();
 
 
-const filteredProducts = products.filter((product) =>
-  product.title.toLowerCase().includes(combinedSearch) ||
-  product.description.toLowerCase().includes(combinedSearch) ||
-  product.brand.toLowerCase().includes(combinedSearch)
-);
+const filteredProducts = products.filter((p) => {
+  const rupeePrice = Math.round(p.price * 80);   // API gives USD
+  const textMatch =
+    p.title.toLowerCase().includes(combinedSearch) ||
+    p.description.toLowerCase().includes(combinedSearch) ||
+    p.brand.toLowerCase().includes(combinedSearch);
+
+  const priceMatch = rupeePrice >= minPrice && rupeePrice <= maxPrice;
+
+  return textMatch && priceMatch;
+});
 
 
   return (
@@ -70,7 +79,52 @@ const filteredProducts = products.filter((product) =>
         </div>
       </div>
 
-     
+    <div className="mb-6">
+  <h3 className="text-lg font-semibold mb-2">Price range (₹)</h3>
+
+
+  <div className="flex items-center gap-4 mb-2">
+    <label className="flex items-center gap-2">
+      Min
+      <input
+        type="number"
+        min="0"
+        max={maxPrice}
+        step="100"
+        value={minPrice}
+        onChange={(e) => setMinPrice(parseInt(e.target.value) || 0)}
+        className="w-24 p-1 border rounded"
+      />
+    </label>
+
+    <label className="flex items-center gap-2">
+      Max
+      <input
+        type="number"
+        min={minPrice}
+        max="100000"
+        step="100"
+        value={maxPrice}
+        onChange={(e) => setMaxPrice(parseInt(e.target.value) || 0)}
+        className="w-24 p-1 border rounded"
+      />
+    </label>
+  </div>
+
+ 
+  <input
+    type="range"
+    min="500"
+    max="50000"
+    step="500"
+    value={maxPrice}
+    onChange={(e) => setMaxPrice(parseInt(e.target.value))}
+    className="w-full"
+  />
+  <p className="text-sm mt-1 text-gray-600">
+    Showing items priced between ₹{minPrice.toLocaleString()} and ₹{maxPrice.toLocaleString()}
+  </p>
+</div>
 
       <div
         className={`${

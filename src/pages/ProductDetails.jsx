@@ -1,10 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import Rating from '../components/Ratings';
+import { getEstimatedDeliveryDate } from '../utils/date';
+
 function ProductDetails() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const { addToCart } = useCart();
+  const mockReviews = [
+    {
+      user: "Riya S.",
+      rating: 4.5,
+      comment: "Great quality product, totally worth the price!",
+    },
+    {
+      user: "Arjun T.",
+      rating: 4.0,
+      comment: "Nice value. Delivery was fast too.",
+    },
+    {
+      user: "Neha P.",
+      rating: 5.0,
+      comment: "Exceeded expectations! Would recommend.",
+    },
+  ];
 
   useEffect(() => {
     fetch(`https://dummyjson.com/products/${id}`)
@@ -32,11 +52,18 @@ function ProductDetails() {
         </p>
         <p className="text-2xl text-gray-500 mb-2">Brand: {product.brand}</p>
         <p className="text-2xl text-gray-500 mb-2">Category: {product.category}</p>
-        <p className="text-xl text-yellow-600">Rating: {product.rating}⭐</p>
+        <p className="text-green-600 mt-2 font-medium">
+          🚚 Estimated Delivery: {getEstimatedDeliveryDate()}
+        </p>
+
+        <Rating rating={product.rating} />
+
         <button onClick={() => addToCart(product)} className="mt-8 w-45 h-20 text-2xl bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition cursor-pointer ">
           Add to Cart
         </button>
       </div>
+
+
     </div>
   );
 }

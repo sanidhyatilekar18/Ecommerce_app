@@ -1,12 +1,66 @@
-# React + Vite
+# 🛒 E-Commerce Clothing Store
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fully functional, responsive E-commerce web application built with **React**, **Firebase**, and **Tailwind CSS**, featuring clothing products categorized for **Men**, **Women**, and **Kids**. Users can browse, search, filter, add items to cart, and experience a seamless shopping experience.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+### 🧑‍💼 User Interface
+- Responsive UI with **Sidebar Navigation**
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Interactive **Toast Notifications** using `react-toastify`
+
+### 🛍️ Product Management
+- View all products by category: **Men**, **Women**,**Others**
+- **Product search** by title
+- **Filter by price** range
+- **Estimated delivery** display for each product
+- **Ratings and Reviews** shown on product cards
+- Discount logic and **coupon system** (basic)
+
+### 🧺 Cart System
+- Add to cart / Remove from cart
+- Quantity adjustment
+- Cart total price calculation
+- Apply **coupons or discounts**
+
+---
+
+## 🔧 Tech Stack
+
+| Tech        | Description                                 |
+|-------------|---------------------------------------------|
+| **React**   | Frontend framework                          |
+| **Firebase**| Backend (Authentication, Firestore)         |
+| **Tailwind CSS** | Utility-first CSS for responsive design |
+| **React Router** | Page routing/navigation                  |
+| **react-toastify** | Toast notifications                    |
+| **Font Awesome** | Icons for sidebar and UI                |
+
+---
+
+
+
+---
+
+## 📸 Screenshots
+
+> You can include screenshots here (e.g., Home Page, Product Grid, Cart Page)
+
+---
+
+## 🛠️ Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/sanidhyatilekar18/Ecommerce_app.git
+
+# Navigate to project folder
+cd Ecommerce_app
+
+# Install dependencies
+npm install
+
+# Run the application
+npm run dev

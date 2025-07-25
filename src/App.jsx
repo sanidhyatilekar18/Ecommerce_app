@@ -12,8 +12,11 @@ import ShopCategory from './pages/ShopCategory.jsx'
 import ProductDetails from './pages/ProductDetails.jsx'
 import OrderSuccess from './pages/OrderSuccess.jsx'
 import React, { useState } from 'react'
+import Mens from './pages/Mens.jsx'
+import Womens from './pages/Womens.jsx'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
+
 
 
 function App() {
@@ -37,9 +40,9 @@ function App() {
             <Routes>
               
               <Route path="/" element={<Home />} />
-              <Route path="/mens" element={<ShopCategory />} />
-              <Route path="/womens" element={<ShopCategory />} />
-              <Route path="/kids" element={<ShopCategory />} />
+              <Route path="/mens" element={<Mens />} />
+              <Route path="/womens" element={<Womens />} />
+             
               <Route path="/products" element={<Products />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/products/:id" element={<ProductDetails />} />
