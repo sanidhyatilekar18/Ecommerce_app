@@ -35,14 +35,12 @@ function Navbar({ toggleSideBar  }) {
   };
     
     return (
-        <div className="w-full h-20 bg-blue-400 text-white flex items-center justify-between px-4 sm:px-6 md:max-w-screen sm:max-w-full md:min-w-full sm:min-w-screen md:justify-between sm:justify-between  absolute  shadow-2xl">
+        <div className="w-full h-20 bg-blue-400 text-white flex items-center justify-between px-4 sm:px-6 md:max-w-screen sm:max-w-full md:min-w-full sm:min-w-screen md:justify-between sm:justify-between  sticky top-0 z-50  shadow-2xl">
 
             <div className="flex items-center gap-4">
                 <button onClick={toggleSideBar} className='cursor-pointer p-4'>
                     <FontAwesomeIcon icon={faBars} size="2xl" />
                 </button>
-
-
 
                 <h1 className="text-4xl sm:text-2xl font-bold hidden sm:block">Ecommerce Store</h1>
             </div>
@@ -55,7 +53,9 @@ function Navbar({ toggleSideBar  }) {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           onKeyDown={handleKeyDown}
-          className="px-4 py-2 pr-10 rounded-lg bg-white text-black w-full focus:outline-none focus:ring-2 focus:ring-blue-300"
+           className="px-4 py-2 pr-10 rounded-full bg-white text-black w-full 
+  border border-gray-300 shadow-sm focus:outline-none focus:ring-2 
+  focus:ring-blue-500 transition"
         />
         <FontAwesomeIcon
           icon={faMagnifyingGlass}
@@ -68,7 +68,7 @@ function Navbar({ toggleSideBar  }) {
 
                 </div>
                 <Link to="/cart">
-                    <FontAwesomeIcon icon={faCartShopping} size='2xl' style={{ color: "white" }} />
+                    <FontAwesomeIcon icon={faCartShopping} size='2xl' style={{ color: "white" }}  className="text-white hover:text-amber-300 transition duration-200" />
                 </Link>
                 <FontAwesomeIcon icon={faBell} size='2xl' style={{ color: "white" }} onClick={handleNotifications} />
                 {showNotifications && (

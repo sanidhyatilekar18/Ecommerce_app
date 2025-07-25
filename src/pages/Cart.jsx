@@ -51,7 +51,7 @@ function Cart() {
       ) : (
         <div className="space-y-4">
           {cartItems.map((item) => (
-            <div key={item.id} className="flex items-center justify-between bg-white p-4 rounded-lg shadow">
+            <div key={item.id} className="flex items-center justify-between bg-white p-4 rounded-lg shadow hover:shadow-md transition duration-200">
               <div className="flex items-center gap-4">
                 <img src={item.thumbnail} alt={item.title} className="w-20 h-20 object-cover rounded" />
                 <div>
@@ -59,10 +59,10 @@ function Cart() {
                   <p className="text-gray-600">&#8377;{item.price} each</p>
                   <p className="text-sm text-gray-600">Delivery by {getEstimatedDeliveryDate()}</p>
 
-                  <div className="flex items-center mt-2">
-                    <button onClick={() => decreaseQty(item.id)} className="px-2 py-1 bg-gray-200 rounded">-</button>
-                    <span className="px-4">{item.quantity}</span>
-                    <button onClick={() => increaseQty(item.id)} className="px-2 py-1 bg-gray-200 rounded">+</button>
+                  <div className="flex items-center mt-2 gap-2">
+                    <button onClick={() => decreaseQty(item.id)} className="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded-md text-lg font-semibold">-</button>
+                    <span className="px-3 text-md">{item.quantity}</span>
+                    <button onClick={() => increaseQty(item.id)} className="px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded-md text-lg font-semibold">+</button>
                   </div>
                 </div>
               </div>
@@ -75,14 +75,14 @@ function Cart() {
             </div>
           ))}
 
-          {/* COUPON SECTION */}
+
           <div className="flex items-center gap-3 mt-6">
             <input
               type="text"
               placeholder="Enter coupon code"
               value={couponCode}
               onChange={(e) => setCouponCode(e.target.value)}
-              className="border rounded px-3 py-2 w-1/2"
+              className="border rounded px-3 py-2 w-full max-w-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
             <button
               onClick={applyCoupon}
@@ -92,8 +92,9 @@ function Cart() {
             </button>
           </div>
 
-      
-          <div className="text-right mt-6 text-lg">
+
+          <div className="text-right mt-6 text-lg space-y-1 border-t pt-4">
+
             <p>Subtotal: <span className="font-semibold">&#8377;{Math.round(totalPrice * 80)}</span></p>
             {appliedCoupon && (
               <>

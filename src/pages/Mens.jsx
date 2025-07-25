@@ -6,8 +6,7 @@ function Mens() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-   const categories = ['mens-shirts', 'mens-shoes', 'mens-watches', 'fragrances'];
-
+    const categories = ['mens-shirts', 'mens-shoes', 'mens-watches', 'fragrances'];
 
     Promise.all(
       categories.map((category) =>
@@ -17,7 +16,6 @@ function Mens() {
       )
     )
       .then((results) => {
-        // Flatten the array of arrays into one
         const allProducts = results.flat();
         setProducts(allProducts);
         setLoading(false);
@@ -31,10 +29,21 @@ function Mens() {
   if (loading) return <p className="text-center mt-10">Loading...</p>;
 
   return (
-    <div className="p-6 mt-30 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
+    <div className="p-6 max-w-7xl mx-auto">
+      <div className="bg-blue-50 p-6 rounded-xl mb-10 text-center shadow">
+        <h2 className="text-4xl font-bold text-blue-900">Men’s Essentials 👕👞⌚</h2>
+        <p className="text-lg mt-2 text-blue-700">
+          Explore the latest trends in fashion, footwear, fragrances, and more.
+        </p>
+      </div>
+
+      <h1 className="text-3xl font-bold mb-6 text-center text-gray-800">Men’s Products</h1>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
     </div>
   );
 }

@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-// import { db } from '../firebase'; // Uncomment if using Firestore
-// import { addDoc, collection } from 'firebase/firestore';
+
 
 const Checkout = () => {
   const { cartItems, clearCart } = useCart();
@@ -37,14 +36,7 @@ const Checkout = () => {
       createdAt: new Date(),
     };
 
-    // Firestore save logic (optional)
-    // try {
-    //   await addDoc(collection(db, 'orders'), orderData);
-    // } catch (err) {
-    //   toast.error('Failed to save order');
-    //   return;
-    // }
-
+  
     toast.success('Order placed successfully!');
     clearCart();
     navigate('/order-success');
@@ -62,7 +54,8 @@ const Checkout = () => {
             placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
             value={form[field]}
             onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded"
+           className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+              
             required
           />
         ))}
